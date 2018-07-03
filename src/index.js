@@ -9,9 +9,35 @@ import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 
+import { INIT_BOOKMARKS } from "./actions";
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 let store = createStoreWithMiddleware(reducers);
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const bookmarks = [
+  {
+    url: "https://google.com",
+    desc: "google",
+    tags: ["search", "engine", "thing"]
+  },
+  {
+    url: "https://reddit.com",
+    desc: "reddit",
+    tags: ["social", "cats"]
+  }
+];
+
+store.dispatch({
+  type: INIT_BOOKMARKS,
+  payload: bookmarks
+});
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
+
 registerServiceWorker();
