@@ -1,5 +1,13 @@
 @import "../../_variables.scss";
 
+.search-wrapper {
+  float: right;
+  margin-bottom: 20px;
+  .icon {
+    padding-top: 13px;
+  }
+}
+
 table.bookmarks {
   .ui.label {
     font-weight: 500;

@@ -8,6 +8,13 @@ import * as actions from "../../actions";
 import "./BookmarksTable.css";
 
 class BookmarksTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchString: ""
+    };
+  }
+
   renderBookmark = bookmark => {
     return (
       <tr key={bookmark.url}>
@@ -49,19 +56,44 @@ class BookmarksTable extends Component {
     ]);
   };
 
+  onSearchChange = event => {
+    this.setState({ searchString: event.target.value });
+  };
+
   render() {
     return (
-      <table className="ui teal celled striped table bookmarks">
-        <thead>
-          <tr>
-            <th>URL</th>
-            <th>Description</th>
-            <th>Tags</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>{this.props.bookmarks.map(this.renderBookmark)}</tbody>
-      </table>
+      <div>
+        <div className="ui icon input search-wrapper">
+          <i className="icon">
+            <i className="far fa-search" />
+          </i>
+          <input
+            type="text"
+            placeholder="Search ..."
+            onChange={this.onSearchChange}
+          />
+        </div>
+        <table className="ui teal celled striped table bookmarks">
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th>Description</th>
+              <th>Tags</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.bookmarks
+              .filter(
+                bookmark =>
+                  bookmark.url.includes(this.state.searchString) ||
+                  bookmark.desc.includes(this.state.searchString) ||
+                  bookmark.tags.includes(this.state.searchString)
+              )
+              .map(this.renderBookmark)}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
