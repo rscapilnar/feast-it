@@ -1,3 +1,3 @@
 // to hold action type strings
-export const INIT_BOOKMARKS = "INIT_BOOKMARKS";
+export const SET_BOOKMARKS = "SET_BOOKMARKS";
 export const ADD_BOOKMARK = "ADD_BOOKMARK";

@@ -9,7 +9,7 @@ import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 
-import { INIT_BOOKMARKS } from "./actions";
+import { SET_BOOKMARKS } from "./actions";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -21,7 +21,7 @@ const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 // if we have bookmarks, i.e. the localStorage wasn't empty, dispatch action to put them in the store
 if (bookmarks) {
   store.dispatch({
-    type: INIT_BOOKMARKS,
+    type: SET_BOOKMARKS,
     payload: bookmarks
   });
 }

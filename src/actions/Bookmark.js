@@ -1,4 +1,4 @@
-import { ADD_BOOKMARK } from "./types";
+import { ADD_BOOKMARK, SET_BOOKMARKS } from "./types";
 
 export const addBookmark = bookmark => {
   // check if there's something in the local storage
@@ -18,5 +18,13 @@ export const addBookmark = bookmark => {
   return {
     type: ADD_BOOKMARK,
     payload: bookmark
+  };
+};
+
+export const setBookmarks = bookmarks => {
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  return {
+    type: SET_BOOKMARKS,
+    payload: bookmarks
   };
 };
