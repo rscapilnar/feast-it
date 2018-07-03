@@ -15,23 +15,16 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 let store = createStoreWithMiddleware(reducers);
 
-const bookmarks = [
-  {
-    url: "https://google.com",
-    desc: "google",
-    tags: ["search", "engine", "thing"]
-  },
-  {
-    url: "https://reddit.com",
-    desc: "reddit",
-    tags: ["social", "cats"]
-  }
-];
+// get bookmarks from localStorage and parse back into array
+const bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 
-store.dispatch({
-  type: INIT_BOOKMARKS,
-  payload: bookmarks
-});
+// if we have bookmarks, i.e. the localStorage wasn't empty, dispatch action to put them in the store
+if (bookmarks) {
+  store.dispatch({
+    type: INIT_BOOKMARKS,
+    payload: bookmarks
+  });
+}
 
 ReactDOM.render(
   <Provider store={store}>

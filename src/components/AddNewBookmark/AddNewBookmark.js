@@ -14,7 +14,7 @@ class AddNewBookmark extends Component {
     const bookmark = {
       url: values.url,
       desc: values.desc,
-      tags: values.tags.split(",") //split tags string into array
+      tags: values.tags.trim().split(",") //split trimmed tags string into array
     };
     // call action creator with our bookmark object
     this.props.addBookmark(bookmark);
