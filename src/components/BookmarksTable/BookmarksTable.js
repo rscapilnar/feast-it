@@ -6,7 +6,6 @@ import "./BookmarksTable.css";
 
 class BookmarksTable extends Component {
   renderBookmark = bookmark => {
-    // console.log(bookmark);
     return (
       <tr key={bookmark.url}>
         <td>{bookmark.url}</td>
@@ -17,11 +16,14 @@ class BookmarksTable extends Component {
   };
 
   renderTags = tag => {
-    return <div className="ui teal label">{tag}</div>;
+    return (
+      <div className="ui teal label" key={tag}>
+        {tag}
+      </div>
+    );
   };
 
   render() {
-    console.log(this.props.bookmarks);
     return (
       <table className="ui teal celled striped table">
         <thead>
@@ -38,7 +40,6 @@ class BookmarksTable extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.bookmarks);
   return { bookmarks: state.bookmarks };
 };
 
